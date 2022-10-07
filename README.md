@@ -8,4 +8,4 @@
 # we need to determine if the unit we received was in metric or imperial units. 
 # Then we need to convert that unit that was highlighted. We can use the pandas library for this. 
 # So now we have a converted unit. Our browser app should populate the most recent data that we converted from our pandas library
-# **Ancillary but cool** figure out how to have the conversion appear when you right click 
+# **Ancillary but cool** figure out how to have the conversion appear when you right click
