@@ -19,11 +19,14 @@ url_to_scrape = "NEED CURRENT/BROWSER TAB/URL"
 
 html_document = getHTMLdocument(url_to_scrape)
 
+
 soup = BeautifulSoup(html_document, 'html.parser')
 
 # Use selenium library to get the URL based on the web browser used
 # In this case we are doing chrome to get the current URL
-driver = webdriver.Chrome()
+# LINE 28 NEEDS A CORRECT PATH THAT I DON'T KNOW WHAT IT IS -GREISY
+driver = webdriver.Chrome(executable_path=r'\path\to\chromedriver.exe')
+driver.get('http://google.com')
 the_url = driver.current_url
 
 # Creating empty list to hold the type of measurements being used by the page
@@ -37,7 +40,9 @@ the_soup = BeautifulSoup(page_content)
 
 # Trying to find the keywords that will help us get the measurements in the page
 for e in soup.findAll(attrs={"class": "ingredients"}):
-    the_amount = e.find('div', attr={'class': 'ingredients'})
+    the_amount = e.find('li', attr={'class': 'data-amount'})
+    the_unit = e.find('li', attr={'class': 'data-unit'})
+
 
 
 
