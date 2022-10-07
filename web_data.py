@@ -19,3 +19,5 @@ url_to_scrape = "NEED CURRENT/BROWSER TAB/URL"
 html_document = getHTMLdocument(url_to_scrape)
 
 soup = BeautifulSoup(html_document, 'html.parser')
+
+# now we need to check whether the measurements are generally imperial or metric and convert (and after that we will need to redisplay as the style the user prefers. )
