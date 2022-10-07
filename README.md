@@ -1,8 +1,8 @@
 # Measurement Converter 
 
-Use beautiful soup and pandas
-So what we want is a way to extract a measurement of a unit and the user can highlight it and it will return the 
-unit converted - either from imperial to metric or metric to imperial. 
+Uses selenium, beautiful soup, and pandas
+Goal: Take a webpage's measurements and convert to user's selected type (whether metric-> imperial or imperial-> metric).
+
 Step 1 is to convert the text - > the browser extension will parse the webpage, I believe by using beautiful soup
 The text is saved? by beautiful soup and will need to be converted to the alternative. So in order to do that, 
 we need to determine if the unit we received was in metric or imperial units. 
