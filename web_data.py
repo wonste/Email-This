@@ -5,43 +5,63 @@
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 import pandas
+import requests
 
 
-def getHTMLdocument(url):
+def get_html_document(url):
 
     response = requests.get(url)
 
     return response.text
     # this returns our repsonse in json format
 
-url_to_scrape = "NEED CURRENT/BROWSER TAB/URL"
-
-html_document = getHTMLdocument(url_to_scrape)
-
-
-soup = BeautifulSoup(html_document, 'html.parser')
 
 # Use selenium library to get the URL based on the web browser used
 # In this case we are doing chrome to get the current URL
 # LINE 28 NEEDS A CORRECT PATH THAT I DON'T KNOW WHAT IT IS -GREISY
-driver = webdriver.Chrome(executable_path=r'\path\to\chromedriver.exe')
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get('http://google.com')
-the_url = driver.current_url
+old_url = driver.current_url
 
-# Creating empty list to hold the type of measurements being used by the page
-unit = []           # oz, ml, tbsp, tsp, L, cup(s) etc...
-amount = []
 
-driver.get(the_url)
+class NewPage:
 
-page_content = driver.page_source
-the_soup = BeautifulSoup(page_content)
+    def __init__(self, old_url):
+        self.old_url = old_url
 
-# Trying to find the keywords that will help us get the measurements in the page
-for e in soup.findAll(attrs={"class": "ingredients"}):
-    the_amount = e.find('li', attr={'class': 'data-amount'})
-    the_unit = e.find('li', attr={'class': 'data-unit'})
+    def __call__(self, driver):
+        if driver.current_url != self.old_url:
+            return driver.current_url
+
+
+while True:
+    wait = WebDriverWait(driver, timeout=120)
+    url_to_scrape = wait.until(NewPage(old_url))
+    old_url = url_to_scrape
+
+    print(url_to_scrape)
+
+    # new url than before
+
+    html_document = get_html_document(url_to_scrape)
+
+    soup = BeautifulSoup(html_document, features='html.parser')
+
+    # Creating empty list to hold the type of measurements being used by the page
+    unit = []           # oz, ml, tbsp, tsp, L, cup(s) etc...
+    amount = []
+
+    page_content = driver.page_source
+    the_soup = BeautifulSoup(page_content, features="html.parser")
+
+    # Trying to find the keywords that will help us get the measurements in the page
+    for e in soup.findAll(attrs={"class": "ingredients"}):
+        the_amount = e.find('li', attr={'class': 'data-amount'})
+        the_unit = e.find('li', attr={'class': 'data-unit'})
 
 
 
