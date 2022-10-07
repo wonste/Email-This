@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<!--
+This page displays when the extension is clicked BECAUSE
+our current line 14 of manifest.json calls this file (popup.html)
+ -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python converter plugin thingy please rename me's Popup</title>
+    <style>
+
+        body{
+            font-family: "Segoe UI, "Lucida Grande", Tahoma, sans-serif;
+            font-size: 100%;
+        }
+
+        #status
+        {
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+        }
+    </style>
+
+    <script src = "popup.js"></script>
+
+</head>
+<body>
+    <div id="status"></div>
+    <img id="image-result" hidden>
+</body>
+</html>
