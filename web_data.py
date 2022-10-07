@@ -7,5 +7,8 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import pandas
 
+driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
 
+measurement_type = []
+amount = []
 
