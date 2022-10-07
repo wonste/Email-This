@@ -7,8 +7,15 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import pandas
 
-driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
+def getHTMLdocument(url):
 
-measurement_type = []
-amount = []
+    response = requests.get(url)
 
+    return response.text
+    # this returns our repsonse in json format
+
+url_to_scrape = "NEED CURRENT/BROWSER TAB/URL"
+
+html_document = getHTMLdocument(url_to_scrape)
+
+soup = BeautifulSoup(html_document, 'html.parser')
