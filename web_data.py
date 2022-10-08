@@ -17,7 +17,7 @@ def get_html_document(url):
     response = requests.get(url)
 
     return response.text
-    # this returns our repsonse in json format
+    # this returns our response in json format
 
 
 # Use selenium library to get the URL based on the web browser used
@@ -39,7 +39,7 @@ class NewPage:
 
 
 while True:
-    wait = WebDriverWait(driver, timeout=120)
+    wait = WebDriverWait(driver)
     url_to_scrape = wait.until(NewPage(old_url))
     old_url = url_to_scrape
 
@@ -66,4 +66,5 @@ while True:
 
 
 
-# now we need to check whether the measurements are generally imperial or metric and convert (and after that we will need to redisplay as the style the user prefers. )
+# now we need to check whether the measurements are generally imperial or metric and convert
+# (and after that we will need to redisplay as the style the user prefers. )
