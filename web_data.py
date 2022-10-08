@@ -22,8 +22,11 @@ def get_html_document(url):
 
 # Use selenium library to get the URL based on the web browser used
 # In this case we are doing chrome to get the current URL
-# LINE 28 NEEDS A CORRECT PATH THAT I DON'T KNOW WHAT IT IS -GREISY
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
+#Greisy's path
+driver = webdriver.Chrome('/Users/greisyvirgen/chromedriver')
+
+# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 driver.get('http://google.com')
 old_url = driver.current_url
 
@@ -46,7 +49,6 @@ while True:
     print(url_to_scrape)
 
     # new url than before
-
     html_document = get_html_document(url_to_scrape)
 
     # Trying to write to a new text file
@@ -68,7 +70,6 @@ while True:
     for e in soup.findAll('div', attrs={"class": "ingredients"}):
         the_amount = e.find('li', attr={'class': 'data-amount'})
         the_unit = e.find('li', attr={'class': 'data-unit'})
-
 
 
 
