@@ -1,4 +1,4 @@
-# We can analyze all of the data of the web page
+# We can analyze all the data of the web page
 # and with the extension on the browser we can update
 # the measurements found. We will analyze Chrome
 # since that is the most used browser.
@@ -17,7 +17,7 @@ def get_html_document(url):
     response = requests.get(url)
 
     return response.text
-    # this returns our repsonse in json format
+    # this returns our response in json format
 
 
 # Use selenium library to get the URL based on the web browser used
@@ -49,6 +49,12 @@ while True:
 
     html_document = get_html_document(url_to_scrape)
 
+    # Trying to write to a new text file
+    # Maybe it'll work
+    file = open('url_data.txt', 'w')
+    file.write(html_document)
+    file.close()
+
     soup = BeautifulSoup(html_document, features='html.parser')
 
     # Creating empty list to hold the type of measurements being used by the page
@@ -58,12 +64,13 @@ while True:
     page_content = driver.page_source
     the_soup = BeautifulSoup(page_content, features="html.parser")
 
-    # Trying to find the keywords that will help us get the measurements in the page
-    for e in soup.findAll(attrs={"class": "ingredients"}):
+    # Trying to find the keywords that will help us get the measurements/units in the page
+    for e in soup.findAll('div', attrs={"class": "ingredients"}):
         the_amount = e.find('li', attr={'class': 'data-amount'})
         the_unit = e.find('li', attr={'class': 'data-unit'})
 
 
 
 
-# now we need to check whether the measurements are generally imperial or metric and convert (and after that we will need to redisplay as the style the user prefers. )
+
+# now we need to check whether the measurements are generally imperial or metric and convert (and after that we will need to redisplay as the style the user prefers)
