@@ -2,7 +2,7 @@
 {
   "manifest_version": 3,
 
-  "name": "Python converter plugin thingy please rename me",
+  "name": "Get your units right!",
   "version": "1.0",
 
   "browser_action": {
