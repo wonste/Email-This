@@ -50,7 +50,7 @@ while True:
     html_document = get_html_document(url_to_scrape)
 
     # Trying to write to a new text file
-    # Maybe it'll work
+    # Maybe it'll work idk yet
     file = open('url_data.txt', 'w')
     file.write(html_document)
     file.close()
